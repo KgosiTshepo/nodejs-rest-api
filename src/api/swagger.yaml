@@ -1,0 +1,185 @@
+swagger: "2.0"
+info:
+  version: "1.0.0"
+  title: "API Documentation"
+basePath: "/api/v1"
+tags:
+  - name: "User"
+  - name: "Product"
+schemes:
+  - "https"
+  - "http"
+paths:
+  /register:
+    post:
+      tags:
+        - "User"
+      summary: "Create new user"
+      description: "An endpoint to create a new user"
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      parameters:
+        - in: "body"
+          name: "body"
+          description: "User object that needs to be passed as a payload"
+          required: true
+          schema:
+            $ref: "#/definitions/User"
+      responses:
+        "200":
+          description: "User Created"
+  /login:
+    post:
+      tags:
+        - "User"
+      summary: "Login"
+      description: "An endpoint to Login"
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      parameters:
+        - in: "body"
+          name: "body"
+          description: "User object that needs to be passed as a payload"
+          required: true
+          schema:
+            $ref: "#/definitions/User"
+      responses:
+        "200":
+          description: "User LoggedIn"
+  /product:
+    post:
+      tags:
+        - "Product"
+      summary: "Add new product"
+      description: "An endpoint to create new product"
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      parameters:
+        - in: "body"
+          name: "body"
+          description: "Product object that needs to be passed as a payload"
+          required: true
+          schema:
+            $ref: "#/definitions/Product"
+      responses:
+        "200":
+          description: "Product Added"
+      security:
+        - Bearer: []
+  /products:
+    get:
+      tags:
+        - "Product"
+      summary: "List all products"
+      description: "An endpoint to return a list of products"
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      parameters: []
+      responses:
+        "200":
+          description: "All Products"
+      security:
+        - Bearer: []
+  /product{productId}:
+    get:
+      tags:
+        - "Product"
+      summary: "Find product by ID"
+      description: "An endpoint to return a list of products"
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "productId"
+          in: "path"
+          description: "ID of product that needs to be fetched"
+          required: true
+          format: "int64"
+      responses:
+        "200":
+          description: "Product Details"
+      security:
+        - Bearer: []
+    delete:
+      tags:
+        - "Product"
+      summary: "Delete product by ID"
+      description: "An endpoint to delete a product by ID"
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "productId"
+          in: "path"
+          description: "ID of product that needs to be deleted"
+          required: true
+          format: "int64"
+      responses:
+        "200":
+          description: "Product Removed"
+      security:
+        - Bearer: []
+    put:
+      tags:
+        - "Product"
+      summary: "Update product details"
+      description: "An endpoint to update product details"
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      parameters:
+        - in: "body"
+          name: "body"
+          description: "Product object that needs to be passed as a payload"
+          required: true
+          schema:
+            $ref: "#/definitions/Product"
+      responses:
+        "200":
+          description: "Product details updated"
+      security:
+        - Bearer: []
+securityDefinitions:
+  Bearer:
+    type: apiKey
+    name: Authorization
+    in: header
+definitions:
+  User:
+    type: object
+    properties:
+      email:
+        type: string
+      password:
+        type: string
+  Product:
+    type: object
+    properties:
+      name:
+        type: string
+      price:
+        type: number
+        format: "int64"
+      brand:
+        type: "string"
+  ApiResponse:
+    type: "object"
+    properties:
+      status:
+        type: "integer"
+        format: "int32"
+      type:
+        type: "string"
+      message:
+        type: "string"
