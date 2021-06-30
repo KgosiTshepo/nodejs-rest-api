@@ -3,11 +3,28 @@
   "version": "1.0.0",
   "description": "",
   "main": "server.js",
+  "type": "commonjs",
+  "engines": {
+    "node": ">=8.10.0"
+  },
   "devDependencies": {
-    "nodemon": "^2.0.4"
+    "eslint": "^7.29.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-config-node": "^4.1.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-config-standard": "^16.0.3",
+    "eslint-plugin-import": "^2.23.4",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-prettier": "^3.4.0",
+    "eslint-plugin-promise": "^5.1.0",
+    "husky": "^6.0.0",
+    "lint-staged": "^11.0.0",
+    "nodemon": "^2.0.4",
+    "prettier": "^2.3.2"
   },
   "scripts": {
-    "start": "nodemon server.js"
+    "start": "nodemon server.js",
+    "prepare": "husky install"
   },
   "author": "Kgosi Tshepo Bahula",
   "license": "ISC",
@@ -21,5 +38,9 @@
     "mongoose": "^5.9.19",
     "swagger-ui-express": "^4.1.4",
     "yamljs": "^0.3.0"
+  },
+  "lint-staged": {
+    "*.js": ["eslint --cache --fix","prettier --write"],
+    "*.{md,html,css}": "prettier --write"
   }
 }
