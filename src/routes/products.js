@@ -1,13 +1,12 @@
 const express = require('express');
-
-const router = express.Router();
-
 const productController = require('../controllers/productController');
 const product = require('../ middleware/product');
 const productSchema = require('../schema/productSchema');
 const validateToken = require('../helpers/validateAuthToken');
 
-// route  POST/product
+const router = express.Router();
+
+// @desc  POST/product
 router.post(
 	'/product',
 	validateToken.validateAuthorizationToken,
@@ -15,7 +14,7 @@ router.post(
 	productController.createProduct
 );
 
-// route  GET/products
+// @desc GET/products
 router.get(
 	'/products',
 	validateToken.validateAuthorizationToken,
@@ -23,14 +22,14 @@ router.get(
 	productController.getAllProducts
 );
 
-// route GET /products/:id
+// @desc GET /products/:id
 router.get(
 	'/product/:id',
 	validateToken.validateAuthorizationToken,
 	productController.getProductById
 );
 
-// route PUT /product/:id
+// @desc PUT /product/:id
 router.put(
 	'/products/:id',
 	validateToken.validateAuthorizationToken,
@@ -38,7 +37,7 @@ router.put(
 	productController.updateProductById
 );
 
-// router DELETE /delete/:id
+// @desc DELETE /delete/:id
 router.delete(
 	'/products/:id',
 	validateToken.validateAuthorizationToken,
